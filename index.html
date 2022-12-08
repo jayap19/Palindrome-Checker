@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Palindrome Checker</title>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>Palindrome Checker</h1>
+            <p>A palindrome is a word or a phrase that reads the same backwards as forwards.</p>
+        </header>
+        <div class="inputs">
+            <input type="text" placeholder="Enter text or number">
+            <button>Check Palindrome</button>
+        </div>
+        <p class="info-txt"></p>
+    </div>
+
+    <script>
+        const txtInput = document.querySelector(".inputs input"),
+        checkBtn = document.querySelector(".inputs button");
+        infoTxt = document.querySelector(".info-txt");
+        let filterInput;
+        checkBtn.addEventListener("click",() => {
+        
+        // splitting user input character, reversing them and joining them in a single word
+        let reverseInput = filterInput.split("").reverse().join("");
+        infoTxt.style.display = "block";
+        if(filterInput != reverseInput){
+            return infoTxt.innerHTML = `No, <span>'${txtInput.value}'</span> isn't a palindrome!`;
+        }
+        infoTxt.innerHTML = `Yes, <span>'${txtInput.value}'</span> is a palindrome!`;
+});
+        txtInput.addEventListener("keyup", () => {
+        //removing spaces and all special characters from entered value
+        filterInput = txtInput.value.toLowerCase().replace(/[^A-Z0-9]/ig, "");
+        if(filterInput){
+            return checkBtn.classList.add("active")
+        }
+        infoTxt.style.display = "none";
+        checkBtn.classList.remove("active");
+});
+    </script>
+</body>
+</html>
